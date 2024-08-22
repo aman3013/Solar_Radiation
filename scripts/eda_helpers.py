@@ -343,5 +343,15 @@ def create_histograms(df):
 
     axes[1, 1].hist(df['WS'], bins=50, alpha=0.5, label='WS')
 
+def calculate_zscores(df, cols, threshold=3):
+    # Calculate Z-scores for each column
+    for col in cols:
+        df[f'{col}_zscore'] = np.abs((df[col] - df[col].mean()) / df[col].std())
+
+    # Flag outliers
+    df['outlier'] = np.where(df[[f'{col}_zscore' for col in cols]].max(axis=1) > threshold, 1, 0)
+
+    return df
+
 
 
