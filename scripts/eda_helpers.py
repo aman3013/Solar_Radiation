@@ -1,6 +1,8 @@
 import pandas as pd
 from tabulate import tabulate as tb
 import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
 def read_csv_to_df(file_path):
     """
     Reads a CSV file into a pandas DataFrame.
@@ -193,4 +195,66 @@ def check_incorrect_entries(df):
 #     """
 #     check_outliers(df)
 #     check_incorrect_entries(df)
+
+
+
+def calculate_correlation_matrix(df):
+    """
+    Calculate the correlation matrix for the given DataFrame.
+
+    Args:
+    - df (pd.DataFrame): The DataFrame containing the data.
+
+    Returns:
+    - corr_matrix (pd.DataFrame): The correlation matrix.
+    """
+    corr_df = df[['GHI', 'DNI', 'DHI', 'TModA', 'TModB']]
+    return corr_df.corr()
+
+def create_correlation_heatmap(corr_matrix):
+    """
+    Create a heatmap for correlation analysis.
+
+    Args:
+    - corr_matrix (pd.DataFrame): The correlation matrix.
+
+    Returns:
+    - None
+    """
+    plt.figure(figsize=(8, 8))
+    sns.heatmap(corr_matrix, annot=True, cmap='coolwarm', square=True)
+    plt.title('Correlation Analysis')
+    plt.show()
+
+def create_pair_plot(df):
+    """
+    Create a pair plot for correlation analysis.
+
+    Args:
+    - df (pd.DataFrame): The DataFrame containing the data.
+
+    Returns:
+    - None
+    """
+    corr_df = df[['GHI', 'DNI', 'DHI', 'TModA', 'TModB']]
+    plt.figure(figsize=(10, 8))
+    sns.pairplot(corr_df)
+    plt.title('Pair Plot for Correlation Analysis')
+    plt.show()
+
+def create_scatter_matrix(df):
+    """
+    Create a scatter matrix for wind conditions and solar irradiance.
+
+    Args:
+    - df (pd.DataFrame): The DataFrame containing the data.
+
+    Returns:
+    - None
+    """
+    scatter_df = df[['WS', 'WSgust', 'WD', 'GHI', 'DNI', 'DHI']]
+    plt.figure(figsize=(10, 8))
+    sns.pairplot(scatter_df, x_vars=['WS', 'WSgust', 'WD'], y_vars=['GHI', 'DNI', 'DHI'], height=4, aspect=0.8)
+    plt.title('Scatter Matrix for Wind Conditions and Solar Irradiance')
+    plt.show()
 
