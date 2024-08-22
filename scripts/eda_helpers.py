@@ -66,6 +66,8 @@ def describe_df(df):
         print(missing_values)
     else:
         print("\nNo missing values found.")
+import pandas as pd
+
 def summary_statistics(df):
     """
     Generates summary statistics for a pandas DataFrame.
@@ -84,6 +86,6 @@ def summary_statistics(df):
     numeric_df = df.select_dtypes(include=['int64', 'float64'])
     if not numeric_df.empty:
         print("Summary Statistics:")
-        print(tb(numeric_df.describe(), headers='keys', tablefmt='psql'))
+        print(numeric_df.describe())
     else:
         print("No numeric columns found.")
