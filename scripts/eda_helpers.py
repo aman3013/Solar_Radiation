@@ -258,3 +258,40 @@ def create_scatter_matrix(df):
     plt.title('Scatter Matrix for Wind Conditions and Solar Irradiance')
     plt.show()
 
+
+def create_polar_plot(df, ws_col='WS', wd_col='WD'):
+    """
+    Create a polar plot of wind speed and direction distribution.
+
+    Parameters:
+    df (Pandas DataFrame): Dataset containing wind speed and direction data.
+    ws_col (str): Column name for wind speed data. Defaults to 'WS'.
+    wd_col (str): Column name for wind direction data. Defaults to 'WD'.
+
+    Returns:
+    None
+    """
+    # Ensure wd is in radians for plotting
+    df[f'{wd_col}_rad'] = np.radians(df[wd_col])
+
+    # Create a polar plot
+    fig = plt.figure(figsize=(8, 8))
+    ax = fig.add_subplot(111, polar=True)
+
+    # Plot wind speed and direction
+    ax.scatter(df[f'{wd_col}_rad'], df[ws_col], c=df[ws_col], cmap='viridis', alpha=0.5)
+
+    # Set plot limits and labels
+    ax.set_rlim(0, df[ws_col].max() * 1.1)  # Set y-axis limit to max wind speed
+    ax.set_rticks([max(df[ws_col]) // 4, max(df[ws_col]) // 2, max(df[ws_col]) * 3 // 4])
+    ax.set_rlabel_position(270)
+    ax.set_title('Wind Speed and Direction Distribution')
+    ax.set_xlabel('Wind Direction (°)', labelpad=20)
+
+    # Add direction labels
+    direction_labels = ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW']
+    ax.set_thetagrids(22.5 * np.arange(8), direction_labels)
+
+    plt.show()
+
+
