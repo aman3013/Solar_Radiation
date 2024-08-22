@@ -428,3 +428,49 @@ def create_time_series_plots(df):
 
 
 
+def clean_data(df):
+    """
+    Clean the input DataFrame by handling missing values and anomalies.
+
+    Args:
+    - df (pd.DataFrame): Input DataFrame to be cleaned.
+
+    Returns:
+    - cleaned_df (pd.DataFrame): Cleaned DataFrame.
+    """
+
+    # Check if the input is a pandas DataFrame
+    if not isinstance(df, pd.DataFrame):
+        raise ValueError("Input must be a pandas DataFrame")
+
+    # Handle missing values in the Comments column
+    if 'Comments' in df.columns:
+        if df['Comments'].isnull().all():
+            df = df.drop('Comments', axis=1)
+
+    # Identify numerical and categorical columns
+    num_cols = df.select_dtypes(include=['int64', 'float64']).columns
+    cat_cols = df.select_dtypes(include=['object']).columns
+
+    # Mean imputation for numerical columns
+    df[num_cols] = df[num_cols].fillna(df[num_cols].mean())
+
+    # Forward fill for categorical columns
+    df[cat_cols] = df[cat_cols].fillna(method='ffill')
+
+    # Handle anomalies in numerical columns
+    mask = np.ones(len(df), dtype=bool)
+    for col in num_cols:
+        Q1 = df[col].quantile(0.25)
+        Q3 = df[col].quantile(0.75)
+        IQR = Q3 - Q1
+        mask = mask & ((df[col] >= (Q1 - 1.5 * IQR)) & (df[col] <= (Q3 + 1.5 * IQR)))
+
+    df = df[mask]
+
+    return df
+
+
+
+
+
