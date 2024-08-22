@@ -321,5 +321,27 @@ def analyze_temperature_data(df):
     print(correlation_matrix)
 
 
+def create_histograms(df):
+    # Create a figure with multiple subplots
+    fig, axes = plt.subplots(nrows=3, ncols=2, figsize=(15, 10))
+
+    # Plot histograms
+    axes[0, 0].hist(df['GHI'], bins=50, alpha=0.5, label='GHI')
+    axes[0, 0].set_title('Global Horizontal Irradiance (W/m²)')
+    axes[0, 0].set_xlabel('Value')
+    axes[0, 0].set_ylabel('Frequency')
+
+    axes[0, 1].hist(df['DNI'], bins=50, alpha=0.5, label='DNI')
+    axes[0, 1].set_title('Direct Normal Irradiance (W/m²)')
+    axes[0, 1].set_xlabel('Value')
+    axes[0, 1].set_ylabel('Frequency')
+
+    axes[1, 0].hist(df['DHI'], bins=50, alpha=0.5, label='DHI')
+    axes[1, 0].set_title('Diffuse Horizontal Irradiance (W/m²)')
+    axes[1, 0].set_xlabel('Value')
+    axes[1, 0].set_ylabel('Frequency')
+
+    axes[1, 1].hist(df['WS'], bins=50, alpha=0.5, label='WS')
+
 
 
