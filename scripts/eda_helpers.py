@@ -1,4 +1,5 @@
 import pandas as pd
+from tabulate import tabulate as tb
 
 def read_csv_to_df(file_path):
     """
@@ -65,3 +66,24 @@ def describe_df(df):
         print(missing_values)
     else:
         print("\nNo missing values found.")
+def summary_statistics(df):
+    """
+    Generates summary statistics for a pandas DataFrame.
+
+    Args:
+    df (pd.DataFrame): The DataFrame to generate summary statistics for.
+
+    Returns:
+    None
+    """
+    if not isinstance(df, pd.DataFrame):
+        print("Error: Input is not a pandas DataFrame.")
+        return
+
+    # Get the summary statistics for numeric columns
+    numeric_df = df.select_dtypes(include=['int64', 'float64'])
+    if not numeric_df.empty:
+        print("Summary Statistics:")
+        print(tb(numeric_df.describe(), headers='keys', tablefmt='psql'))
+    else:
+        print("No numeric columns found.")
