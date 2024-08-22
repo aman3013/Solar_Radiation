@@ -385,6 +385,45 @@ def create_bubble_charts(df, cols, bubble_col):
     plt.tight_layout()
     plt.show()
 
+def create_time_series_plots(df):
+    # Plot line graphs for GHI, DNI, DHI, and Tamb over time
+    plt.figure(figsize=(10, 6))
+    plt.plot(df['GHI'], label='GHI')
+    plt.plot(df['DNI'], label='DNI')
+    plt.plot(df['DHI'], label='DHI')
+    plt.plot(df['Tamb'], label='Tamb')
+    plt.legend()
+    plt.title('Time Series Plot of GHI, DNI, DHI, and Tamb')
+    plt.xlabel('Time')
+    plt.ylabel('Value')
+    plt.show()
+
+    # Plot area plots for GHI, DNI, DHI, and Tamb over time
+    plt.figure(figsize=(10, 6))
+    plt.fill_between(df.index, df['GHI'], label='GHI')
+    plt.fill_between(df.index, df['DNI'], label='DNI')
+    plt.fill_between(df.index, df['DHI'], label='DHI')
+    plt.fill_between(df.index, df['Tamb'], label='Tamb')
+    plt.legend()
+    plt.title('Area Plot of GHI, DNI, DHI, and Tamb')
+    plt.xlabel('Time')
+    plt.ylabel('Value')
+    plt.show()
+
+    # Create a line graph with separate lines for clean and dirty sensors
+    clean_df = df[df['Cleaning'] == 1]
+    dirty_df = df[df['Cleaning'] == 0]
+
+    plt.figure(figsize=(10, 6))
+    plt.plot(clean_df.index, clean_df['ModA'], label='Clean ModA')
+    plt.plot(clean_df.index, clean_df['ModB'], label='Clean ModB')
+    plt.plot(dirty_df.index, dirty_df['ModA'], label='Dirty ModA')
+    plt.plot(dirty_df.index, dirty_df['ModB'], label='Dirty ModB')
+    plt.legend()
+    plt.title('Impact of Cleaning on Sensor Readings')
+    plt.xlabel('Time')
+    plt.ylabel('Value')
+    plt.show()
 
 
 
