@@ -354,4 +354,38 @@ def calculate_zscores(df, cols, threshold=3):
     return df
 
 
+def create_bubble_charts(df, cols, bubble_col):
+    # Create a figure with multiple subplots
+    fig, axes = plt.subplots(nrows=2, ncols=2, figsize=(10, 10))
+
+    # Plot bubble chart for GHI vs. Tamb vs. WS with bubble size representing RH or BP
+    axes[0, 0].scatter(df['GHI'], df['Tamb'], s=df[bubble_col] * 10, alpha=0.5, label='GHI vs. Tamb vs. WS')
+    axes[0, 0].set_title(f'GHI vs. Tamb vs. WS with {bubble_col}')
+    axes[0, 0].set_xlabel('GHI (W/m²)')
+    axes[0, 0].set_ylabel('Tamb (°C)')
+
+    # Plot bubble chart for GHI vs. Tamb vs. WS with bubble size representing RH or BP
+    axes[0, 1].scatter(df['GHI'], df['Tamb'], s=df[bubble_col] * 0.1, alpha=0.5, label='GHI vs. Tamb vs. WS')
+    axes[0, 1].set_title(f'GHI vs. Tamb vs. WS with {bubble_col}')
+    axes[0, 1].set_xlabel('GHI (W/m²)')
+    axes[0, 1].set_ylabel('Tamb (°C)')
+
+    # Plot bubble chart for DNI vs. Tamb vs. WS with bubble size representing RH or BP
+    axes[1, 0].scatter(df['DNI'], df['Tamb'], s=df[bubble_col] * 10, alpha=0.5, label='DNI vs. Tamb vs. WS')
+    axes[1, 0].set_title(f'DNI vs. Tamb vs. WS with {bubble_col}')
+    axes[1, 0].set_xlabel('DNI (W/m²)')
+    axes[1, 0].set_ylabel('Tamb (°C)')
+
+    # Plot bubble chart for DNI vs. Tamb vs. WS with bubble size representing RH or BP
+    axes[1, 1].scatter(df['DNI'], df['Tamb'], s=df[bubble_col] * 0.1, alpha=0.5, label='DNI vs. Tamb vs. WS')
+    axes[1, 1].set_title(f'DNI vs. Tamb vs. WS with {bubble_col}')
+    axes[1, 1].set_xlabel('DNI (W/m²)')
+    axes[1, 1].set_ylabel('Tamb (°C)')
+
+    plt.tight_layout()
+    plt.show()
+
+
+
+
 
