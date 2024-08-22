@@ -3,3 +3,4 @@ tabulate
 numpy
 matplotlib
 seaborn
+statsmodels

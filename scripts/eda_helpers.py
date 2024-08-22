@@ -3,6 +3,7 @@ from tabulate import tabulate as tb
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
+import statsmodels.api as sm
 def read_csv_to_df(file_path):
     """
     Reads a CSV file into a pandas DataFrame.
@@ -293,5 +294,32 @@ def create_polar_plot(df, ws_col='WS', wd_col='WD'):
     ax.set_thetagrids(22.5 * np.arange(8), direction_labels)
 
     plt.show()
+
+def analyze_temperature_data(df):
+    # Create scatter plots
+    fig, axes = plt.subplots(nrows=1, ncols=3, figsize=(15, 5))
+    sns.scatterplot(x='RH', y='Tamb', data=df, ax=axes[0])
+    axes[0].set_title('Temperature vs Relative Humidity')
+    axes[0].set_xlabel('Relative Humidity (%)')
+    axes[0].set_ylabel('Temperature (°C)')
+
+    sns.scatterplot(x='RH', y='GHI', data=df, ax=axes[1])
+    axes[1].set_title('Global Horizontal Irradiance vs Relative Humidity')
+    axes[1].set_xlabel('Relative Humidity (%)')
+    axes[1].set_ylabel('Global Horizontal Irradiance (W/m²)')
+
+    sns.scatterplot(x='RH', y='DNI', data=df, ax=axes[2])
+    axes[2].set_title('Direct Normal Irradiance vs Relative Humidity')
+    axes[2].set_xlabel('Relative Humidity (%)')
+    axes[2].set_ylabel('Direct Normal Irradiance (W/m²)')
+
+    plt.tight_layout()
+    plt.show()
+
+    # Calculate correlations
+    correlation_matrix = df[['Tamb', 'RH', 'GHI', 'DNI']].corr()
+    print(correlation_matrix)
+
+
 
 
