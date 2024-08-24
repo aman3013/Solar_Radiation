@@ -65,8 +65,10 @@ if st.button('Generate plots'):
             st.pyplot(fig)
         elif option == 'Time Series Plots':
             st.write('Time Series Plots')
-            fig = plotting_utils.create_time_series_plots(df)
-            st.pyplot(fig)
+            fig1, fig2, fig3 = plotting_utils.create_time_series_plots(df)
+            st.pyplot(fig1)
+            st.pyplot(fig2)
+            st.pyplot(fig3)
 
 else:
     st.write("Please select plotting options and click 'Generate plots' button.")
