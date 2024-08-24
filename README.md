@@ -6,7 +6,7 @@
 This project was completed in collaboration with the 10 Academy team.
 
 ## Done By
-[Your Name]
+Amanuel Terefe
 
 ## Business Objective
 MoonLight Energy Solutions aims to enhance its operational efficiency and sustainability through targeted solar investments. As an Analytics Engineer, the task is to perform a quick analysis of the environmental measurement data and translate observations into a strategy report.
