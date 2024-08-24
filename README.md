@@ -1,9 +1,8 @@
-
 # Solar Energy Analysis Challenge
 =====================================
 
 ## Collaboration
-This project was completed in collaboration with the 10 Academy team.
+This project is open for collaboration. Contributions are welcome!
 
 ## Done By
 Amanuel Terefe
@@ -41,6 +40,14 @@ A dashboard was developed using Streamlit to visualize data insights. The dashbo
 
 ### Deployment
 The dashboard was deployed to Streamlit Community Cloud.
+
+## How to Contribute
+To contribute to this project, please fork the repository and submit a pull request with your changes. All contributions are welcome, including:
+
+* Bug fixes
+* New features
+* Documentation improvements
+* Code refactoring
 
 ## Acknowledgments
 This project was completed as part of the 10 Academy program. I would like to thank the 10 Academy team for their support and guidance throughout the project.
